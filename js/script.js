@@ -10,6 +10,23 @@ class Nota{
         this.fecha=fecha;
 
     }
+//setters y getters
+    setTitulo(titulo){
+        this.titulo=titulo;
+    }
+    getTitulo(){
+        return this.titulo;
+    }
+    
+    setContenido(contenido){
+        this.contenido=contenido;
+    }
+    getContenido(){
+        return this.contenido;
+    }
 
 
+    //metodo agregar nota
+
+    
 }
