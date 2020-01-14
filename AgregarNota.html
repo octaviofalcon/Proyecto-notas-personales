@@ -50,28 +50,43 @@
             <!-- Titulo-->
             <div class="container">
                 <div class="row">
-                  <div class="col-lg-12 text">
-                    <h1 class="mt-5">Agregar Notas</h1>
+                  <div class="col-lg-12 text-center">
+                    <h1 class="mt-5">Agregar una nota</h1>
+            
+                    <!-- Text boxes-->
 
-                    <!-- Text boxes!!-->
-                    <!--ID -->
+                    <!--ID-->
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroup-sizing-default">ID:</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Generar ID" id="inpId">
-                        <div class="input-group-append">
-                          <button class="btn btn-outline-secondary" type="button" onclick="generarId(20)">Generar</button>
-                        </div>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">ID:</span>
                       </div>
-
-                      <!-- Titulo-->
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroup-sizing-default">Titulo</span>
-                        </div>
-                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Máximo 60 caracteres... " id="inpTitulo" maxlength="60">
+                      <input type="text" class="form-control" placeholder="Click para generar..." id="inpId">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="generarId(20)">Generar</button>
                       </div>
+                    </div>
+                    <!--Titulo-->
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Titulo</span>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Máximo 60 caracteres... " id="inpTitulo" maxlength="60">
+                    </div>
+            
+                    <!-- Texto-->
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Texto</span>
+                      </div>
+                      <textarea class="form-control" aria-label="With textarea" id="inpTexto" placeholder="Máximo 500 caracteres..." maxlength="500"></textarea>
+                    </div>
+                    
+                    <!-- Boton Guardar-->
+                    <button type="button" class="btn btn-primary" onclick="agregarNota()">Guardar</button>
+            
+                  </div>
+                </div>
+              </div>
 
         </section>
 
