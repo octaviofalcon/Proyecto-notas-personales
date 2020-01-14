@@ -41,7 +41,7 @@ function generarId(length) {
 //Metodo de agregar nota
 
 function agregarNota() {
-  id=document.getElementById()
-  titulo;
-  contenido;
+  id=document.getElementById('IdInput');
+  titulo=document.getElementById('TituloInput')
+  contenido=document.getElementById('TextoInput')
 }
