@@ -5,7 +5,7 @@ class Nota {
     this.id = generarId(20);
     this.titulo = titulo;
     this.contenido = contenido;
-    this.fecha = fecha;
+    this.fecha = obtenerFecha();
   }
   //setters y getters
   setTitulo(titulo) {
@@ -44,7 +44,7 @@ function agregarNota() {
   contenido = document.getElementById("TextoInput");
 //compruebo que no esten vacios
   if (titulo.value != "" && contenido.value != "") {
-      var myNota= new Nota(titulo, contenido)
+      var myNota= new Nota(titulo.value, contenido.value)
   }
 }
 
