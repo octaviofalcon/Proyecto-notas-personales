@@ -42,14 +42,37 @@ function generarId(length) {
 function agregarNota() {
   titulo = document.getElementById("TituloInput");
   contenido = document.getElementById("TextoInput");
-//compruebo que no esten vacios
+  //compruebo que no esten vacios
   if (titulo.value != "" && contenido.value != "") {
-      var myNota= new Nota(titulo.value, contenido.value)
+    const myNota = new Nota(titulo.value, contenido.value);
   }
+  var notas = JSON.parse(localStorage.getItem("notas"));
+  if (!notas) {
+    notas = [];
+  }
+  //Compruebo si YA existe
+  comprobarNota(myNota);
+
+  //agregar
+  notas.push(myNota);
+
+  //usar localStorage set Item
+  localStorage.setItem("notas", JSON.stringify(notas));
 }
 
+function comprobarNota(nota) {}
+
 function obtenerFecha() {
-    var today = new Date();
-    var fechaYHora = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear() + ' - ' + today.getHours() + ':' + today.getMinutes();
-    return fechaYHora;
+  var today = new Date();
+  var fechaYHora =
+    today.getDate() +
+    "/" +
+    (today.getMonth() + 1) +
+    "/" +
+    today.getFullYear() +
+    " - " +
+    today.getHours() +
+    ":" +
+    today.getMinutes();
+  return fechaYHora;
 }
