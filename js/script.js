@@ -1,8 +1,8 @@
 //Debo crear la clase nota con todos sus atributos
 class Nota {
   //Constructor
-  constructor(id, titulo, contenido, fecha) {
-    this.id = id;
+  constructor(titulo, contenido, fecha) {
+    this.id = generarId(20);
     this.titulo = titulo;
     this.contenido = contenido;
     this.fecha = fecha;
@@ -41,7 +41,10 @@ function generarId(length) {
 //Metodo de agregar nota
 
 function agregarNota() {
-  id=document.getElementById('IdInput');
-  titulo=document.getElementById('TituloInput')
-  contenido=document.getElementById('TextoInput')
+  id = document.getElementById("IdInput");
+  titulo = document.getElementById("TituloInput");
+  contenido = document.getElementById("TextoInput");
+
+  if (titulo.value != "" && contenido.value != "") {
+  }
 }
