@@ -42,7 +42,14 @@ function generarId(length) {
 function agregarNota() {
   titulo = document.getElementById("TituloInput");
   contenido = document.getElementById("TextoInput");
-
+//compruebo que no esten vacios
   if (titulo.value != "" && contenido.value != "") {
+      var myNota= new Nota(titulo, contenido)
   }
+}
+
+function obtenerFecha() {
+    var today = new Date();
+    var fechaYHora = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear() + ' - ' + today.getHours() + ':' + today.getMinutes();
+    return fechaYHora;
 }
