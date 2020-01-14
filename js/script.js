@@ -26,7 +26,6 @@ class Nota {
 //Metodo de generacion random de ID
 
 function generarId(length) {
-  let idBox = document.getElementById("inpId");
   var id = "";
   var caracteres =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -35,13 +34,12 @@ function generarId(length) {
     id += caracteres.charAt(Math.floor(Math.random() * caracteresLength));
   }
 
-  idBox.value = id;
+  return id;
 }
 
 //Metodo de agregar nota
 
 function agregarNota() {
-  id = document.getElementById("IdInput");
   titulo = document.getElementById("TituloInput");
   contenido = document.getElementById("TextoInput");
 
