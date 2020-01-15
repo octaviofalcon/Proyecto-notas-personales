@@ -73,10 +73,10 @@ function agregarNota() {
 }
 
 
-
+//Metodo de comprobacion de que la nota no exista previamente
 function comprobarNota(titulo) {
   let notas = JSON.parse(localStorage.getItem("notas"));
- var match = false;
+ let match = false;
 if(!notas){
   return false;
 }else{
@@ -90,10 +90,12 @@ if(!notas){
 
 
   //Listar notas
-  //necesito mostrar la lista y vincularla a la tabla
+  
 function mostrarNotas(){
   let myTabla = document.getElementById('tablaBody');
   let notas = JSON.parse(localStorage.getItem('notas'));
+  
+
   if (!notas){
     notas=[];
 
@@ -105,13 +107,27 @@ function mostrarNotas(){
   //la tabla debe incrementar (debe ser igual a tabla + el contenido que yo le sume)
   
   for(let i=0; i<notas.length; i++){
-  myTabla.innerHTML+= `<tr><td>${i+1}</td><td>${notas[i].titulo}</td><td>${notas[i].contenido}</td><td>${notas[i].fecha}</td></tr>`;
+  myTabla.innerHTML+= `<tr><td>${i+1}</td><td>${notas[i].titulo}</td><td>${notas[i].contenido}</td><td>${notas[i].fecha}</td><td><button type="button" class="btn btn-secondary" onclick="borrarNota('${notas[i].id}')">Borrar</button></tr>`;
 }
 
 }
 
+function borrarNota(id){
+  //debo recorrer la lista y comprar el id pasado por parametro con cada posicion
+let notas = JSON.parse(localStorage.getItem("notas"));
+let choque = notas.findIndex(nota => nota.id == id);
+
+//ahora elimino con splice pasandole esa posicion.
+notas.splice(choque, 1);
+localStorage.setItem("notas", JSON.stringify(notas));
+
+alert('Nota eliminada')
 
 
+}
+
+
+//Funcion de obtener fecha de creacion y/o modificacion de la nota
 function obtenerFecha() {
   var today = new Date();
   var fechaYHora =
@@ -127,4 +143,4 @@ function obtenerFecha() {
   return fechaYHora;
 }
 
-mostrarNotas();
+
