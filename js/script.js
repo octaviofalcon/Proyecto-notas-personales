@@ -51,16 +51,38 @@ function agregarNota() {
     notas = [];
   }
   //Compruebo si YA existe
-  comprobarNota(myNota);
+  comprobarNota(titulo);
 
   //agregar
-  notas.push(myNota);
+  if(comprobarNota){
+    notas.push(myNota);
+  }
+  
+  //Vacio el formulario
+  id.value = '';
+  titulo.value = '';
+  texto.value = '';
+  //Aviso que el proceso fue exitoso
+  window.alert('Su nota se ha guardado exitosamente')
 
   //usar localStorage set Item
   localStorage.setItem("notas", JSON.stringify(notas));
 }
 
-function comprobarNota(nota) {}
+function comprobarNota(titulo) {
+ var match = false;
+  for (let i = 0; i < notas.length; i++) {
+      if (notas[i].titulo == titulo.value) {
+          match = true;
+      }
+  } 
+    if(match==true){
+      alert('Ese titulo ya existe. Intente con otro')
+    }
+     
+  }
+
+
 
 function obtenerFecha() {
   var today = new Date();
