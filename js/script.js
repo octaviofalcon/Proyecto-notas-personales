@@ -89,13 +89,20 @@ function comprobarNota(titulo) {
 
   //Listar notas
   //necesito mostrar la lista y vincularla a la tabla
-function mostrarNotas(){
+function mostrarNotas(notas){
   let myTabla = document.getElementById('tablaNotas');
   let notas = JSON.parse(localStorage.getItem('notas'));
   if (notas==null || notas==undefined || notas==0){
     notas=[];
 
   }
+  //Inicializo la tabla vacia
+  myTabla="";
+  //la tabla debe incrementar (debe ser igual a tabla + el contenido que yo le sume)
+for (let i=0; i<notas.length; i++){
+  myTabla= myTabla + //titulo, texto y hora (?????)
+}
+
 }
 
 
