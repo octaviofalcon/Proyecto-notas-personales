@@ -52,14 +52,11 @@ function agregarNota() {
   }
   //Compruebo si YA existe
   comprobarNota(titulo);
-
   //agregar
   if(comprobarNota(titulo)==true){
     notas.push(myNota);
   }
   
- 
-
   //usar localStorage set Item
   localStorage.setItem("notas", JSON.stringify(notas));
 
@@ -70,6 +67,8 @@ function agregarNota() {
    //Aviso que el proceso fue exitoso
    window.alert('Su nota se ha guardado exitosamente')
 }
+
+
 
 function comprobarNota(titulo) {
  var match = false;
@@ -90,7 +89,7 @@ function comprobarNota(titulo) {
   //Listar notas
   //necesito mostrar la lista y vincularla a la tabla
 function mostrarNotas(notas){
-  let myTabla = document.getElementById('tablaNotas');
+  let myTabla = document.getElementById('tablaBody').innerHTML;
   let notas = JSON.parse(localStorage.getItem('notas'));
   if (notas==null || notas==undefined || notas==0){
     notas=[];
@@ -98,9 +97,12 @@ function mostrarNotas(notas){
   }
   //Inicializo la tabla vacia
   myTabla="";
+
+
   //la tabla debe incrementar (debe ser igual a tabla + el contenido que yo le sume)
-for (let i=0; i<notas.length; i++){
-  myTabla= myTabla + //titulo, texto y hora (?????)
+  
+  for(let i=0; i<notas.length; i++){
+  myTabla+= `<tr><td>${notas[i].titulo}</td> <td>${notas[i].contenido}</td> <td>${notas[i].fecha}`
 }
 
 }
