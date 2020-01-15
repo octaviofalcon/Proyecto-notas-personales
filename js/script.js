@@ -58,15 +58,17 @@ function agregarNota() {
     notas.push(myNota);
   }
   
-  //Vacio el formulario
-  id.value = '';
-  titulo.value = '';
-  texto.value = '';
-  //Aviso que el proceso fue exitoso
-  window.alert('Su nota se ha guardado exitosamente')
+ 
 
   //usar localStorage set Item
   localStorage.setItem("notas", JSON.stringify(notas));
+
+   //Vacio el formulario
+   id.value = '';
+   titulo.value = '';
+   texto.value = '';
+   //Aviso que el proceso fue exitoso
+   window.alert('Su nota se ha guardado exitosamente')
 }
 
 function comprobarNota(titulo) {
