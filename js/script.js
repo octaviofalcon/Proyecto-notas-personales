@@ -122,6 +122,7 @@ notas.splice(choque, 1);
 localStorage.setItem("notas", JSON.stringify(notas));
 
 alert('Nota eliminada')
+location.reload();
 
 
 }
