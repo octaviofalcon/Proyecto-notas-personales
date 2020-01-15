@@ -1,11 +1,12 @@
 //Debo crear la clase nota con todos sus atributos
 class Nota {
   //Constructor
-  constructor(titulo, contenido, fecha) {
+  constructor(titulo, contenido) {
     this.id = generarId(20);
     this.titulo = titulo;
     this.contenido = contenido;
     this.fecha = obtenerFecha();
+
   }
   //setters y getters
   setTitulo(titulo) {
@@ -91,20 +92,20 @@ if(!notas){
   //Listar notas
   //necesito mostrar la lista y vincularla a la tabla
 function mostrarNotas(){
-  let myTabla = document.getElementById('tablaBody').innerHTML;
-   let notas = JSON.parse(localStorage.getItem('notas'));
-  if (notas==null || notas==undefined || notas==0){
+  let myTabla = document.getElementById('tablaBody');
+  let notas = JSON.parse(localStorage.getItem('notas'));
+  if (!notas){
     notas=[];
 
   }
   //Inicializo la tabla vacia
-  myTabla="";
+  // myTabla="";
 
 
   //la tabla debe incrementar (debe ser igual a tabla + el contenido que yo le sume)
   
   for(let i=0; i<notas.length; i++){
-  myTabla+= `<tr><td>${notas[i].titulo}</td> <td>${notas[i].contenido}</td> <td>${notas[i].fecha}</td>`
+  myTabla.innerHTML+= `<tr><td>${i+1}</td><td>${notas[i].titulo}</td><td>${notas[i].contenido}</td><td>${notas[i].fecha}</td></tr>`;
 }
 
 }
@@ -125,3 +126,5 @@ function obtenerFecha() {
     today.getMinutes();
   return fechaYHora;
 }
+
+mostrarNotas();
