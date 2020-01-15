@@ -107,11 +107,14 @@ function mostrarNotas(){
   //la tabla debe incrementar (debe ser igual a tabla + el contenido que yo le sume)
   
   for(let i=0; i<notas.length; i++){
-  myTabla.innerHTML+= `<tr><td>${i+1}</td><td>${notas[i].titulo}</td><td>${notas[i].contenido}</td><td>${notas[i].fecha}</td><td><button type="button" class="btn btn-secondary" onclick="borrarNota('${notas[i].id}')">Borrar</button></tr>`;
+  myTabla.innerHTML+= `<tr><td>${i+1}</td><td>${notas[i].titulo}</td><td>${notas[i].contenido}
+  </td><td>${notas[i].fecha}</td><td><button type="button" class="btn btn-secondary" onclick="borrarNota('${notas[i].id}')">Borrar</button>
+  <td><button type="button" class="btn btn-secondary" onclick="editarNota()">Editar</button></td></tr>`
+  ;
 }
 
 }
-
+//Metodo de eliminacion de notas
 function borrarNota(id){
   //debo recorrer la lista y comprar el id pasado por parametro con cada posicion
 let notas = JSON.parse(localStorage.getItem("notas"));
@@ -125,6 +128,26 @@ alert('Nota eliminada')
 location.reload();
 
 
+}
+
+//EDITAR NOTA
+function editarNota(){
+
+  const { value: text } = Swal.fire({
+    title: 'Enter your IP address',
+  input: 'text',
+  inputValue: "",
+    input: 'textarea',
+    inputPlaceholder: 'Escriba el nuevo texto aqui',
+    inputAttributes: {
+      'aria-label': 'Type your message here'
+    },
+    showCancelButton: true
+  })
+  
+  if (text) {
+    Swal.fire(text)
+  }
 }
 
 
