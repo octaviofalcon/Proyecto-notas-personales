@@ -42,44 +42,46 @@ function generarId(length) {
 function agregarNota() {
   titulo = document.getElementById("TituloInput");
   contenido = document.getElementById("TextoInput");
+  let myNota;
   //compruebo que no esten vacios
   if (titulo.value != "" && contenido.value != "") {
-    const myNota = new Nota(titulo.value, contenido.value);
+    myNota = new Nota(titulo.value, contenido.value);
   }
-  var notas = JSON.parse(localStorage.getItem("notas"));
+  let notas = JSON.parse(localStorage.getItem("notas"));
   if (!notas) {
     notas = [];
   }
   //Compruebo si YA existe
   comprobarNota(titulo);
   //agregar
-  if(comprobarNota(titulo)==true){
+  if(!comprobarNota(titulo.value)){
     notas.push(myNota);
-  }
-  
-  //usar localStorage set Item
+    //usar localStorage set Item
   localStorage.setItem("notas", JSON.stringify(notas));
+  //Aviso que el proceso fue exitoso
+  window.alert('Su nota se ha guardado exitosamente')
+} else{
+  window.alert('Titulo ya existente. Intente con uno diferente')
+}
+
+  
 
    //Vacio el formulario
-   id.value = '';
    titulo.value = '';
-   texto.value = '';
-   //Aviso que el proceso fue exitoso
-   window.alert('Su nota se ha guardado exitosamente')
+   contenido.value = '';
 }
 
 
 
 function comprobarNota(titulo) {
+  let notas = JSON.parse(localStorage.getItem("notas"));
  var match = false;
-  for (let i = 0; i < notas.length; i++) {
-      if (notas[i].titulo == titulo.value) {
-          match = true;
-      }
-  } 
-    if(match==true){
-      alert('Ese titulo ya existe. Intente con otro')
-    }
+if(!notas){
+  return false;
+}else{
+  match = notas.find(nota => nota.titulo == titulo);
+  }
+
      return match;
   }
 
@@ -88,9 +90,9 @@ function comprobarNota(titulo) {
 
   //Listar notas
   //necesito mostrar la lista y vincularla a la tabla
-function mostrarNotas(notas){
+function mostrarNotas(){
   let myTabla = document.getElementById('tablaBody').innerHTML;
-  let notas = JSON.parse(localStorage.getItem('notas'));
+   let notas = JSON.parse(localStorage.getItem('notas'));
   if (notas==null || notas==undefined || notas==0){
     notas=[];
 
@@ -102,7 +104,7 @@ function mostrarNotas(notas){
   //la tabla debe incrementar (debe ser igual a tabla + el contenido que yo le sume)
   
   for(let i=0; i<notas.length; i++){
-  myTabla+= `<tr><td>${notas[i].titulo}</td> <td>${notas[i].contenido}</td> <td>${notas[i].fecha}`
+  myTabla+= `<tr><td>${notas[i].titulo}</td> <td>${notas[i].contenido}</td> <td>${notas[i].fecha}</td>`
 }
 
 }
