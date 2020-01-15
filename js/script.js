@@ -54,7 +54,7 @@ function agregarNota() {
   comprobarNota(titulo);
 
   //agregar
-  if(comprobarNota){
+  if(comprobarNota(titulo)==true){
     notas.push(myNota);
   }
   
@@ -79,8 +79,22 @@ function comprobarNota(titulo) {
     if(match==true){
       alert('Ese titulo ya existe. Intente con otro')
     }
-     
+     return match;
   }
+
+
+
+
+  //Listar notas
+  //necesito mostrar la lista y vincularla a la tabla
+function mostrarNotas(){
+  let myTabla = document.getElementById('tablaNotas');
+  let notas = JSON.parse(localStorage.getItem('notas'));
+  if (notas==null || notas==undefined || notas==0){
+    notas=[];
+
+  }
+}
 
 
 
