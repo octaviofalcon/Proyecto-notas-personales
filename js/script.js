@@ -6,7 +6,6 @@ class Nota {
     this.titulo = titulo;
     this.contenido = contenido;
     this.fecha = obtenerFecha();
-
   }
   //setters y getters
   setTitulo(titulo) {
@@ -55,101 +54,113 @@ function agregarNota() {
   //Compruebo si YA existe
   comprobarNota(titulo);
   //agregar
-  if(!comprobarNota(titulo.value)){
+  if (!comprobarNota(titulo.value)) {
     notas.push(myNota);
     //usar localStorage set Item
-  localStorage.setItem("notas", JSON.stringify(notas));
-  //Aviso que el proceso fue exitoso
-  window.alert('Su nota se ha guardado exitosamente')
-} else{
-  window.alert('Titulo ya existente. Intente con uno diferente')
+    localStorage.setItem("notas", JSON.stringify(notas));
+    //Aviso que el proceso fue exitoso
+    window.alert("Su nota se ha guardado exitosamente");
+  } else {
+    window.alert("Titulo ya existente. Intente con uno diferente");
+  }
+
+  //Vacio el formulario
+  titulo.value = "";
+  contenido.value = "";
 }
-
-  
-
-   //Vacio el formulario
-   titulo.value = '';
-   contenido.value = '';
-}
-
 
 //Metodo de comprobacion de que la nota no exista previamente
 function comprobarNota(titulo) {
   let notas = JSON.parse(localStorage.getItem("notas"));
- let match = false;
-if(!notas){
-  return false;
-}else{
-  match = notas.find(nota => nota.titulo == titulo);
+  let match = false;
+  if (!notas) {
+    return false;
+  } else {
+    match = notas.find(nota => nota.titulo == titulo);
   }
 
-     return match;
-  }
+  return match;
+}
 
+//Listar notas
 
+function mostrarNotas() {
+  let myTabla = document.getElementById("tablaBody");
+  let notas = JSON.parse(localStorage.getItem("notas"));
 
-
-  //Listar notas
-  
-function mostrarNotas(){
-  let myTabla = document.getElementById('tablaBody');
-  let notas = JSON.parse(localStorage.getItem('notas'));
-  
-
-  if (!notas){
-    notas=[];
-
+  if (!notas) {
+    notas = [];
   }
   //Inicializo la tabla vacia
   // myTabla="";
 
-
   //la tabla debe incrementar (debe ser igual a tabla + el contenido que yo le sume)
-  
-  for(let i=0; i<notas.length; i++){
-  myTabla.innerHTML+= `<tr><td>${i+1}</td><td>${notas[i].titulo}</td><td>${notas[i].contenido}
-  </td><td>${notas[i].fecha}</td><td><button type="button" class="btn btn-secondary" onclick="borrarNota('${notas[i].id}')">Borrar</button>
-  <td><button type="button" class="btn btn-secondary" onclick="editarNota()">Editar</button></td></tr>`
-  ;
-}
 
+  for (let i = 0; i < notas.length; i++) {
+    myTabla.innerHTML += `<tr><td>${i + 1}</td><td>${notas[i].titulo}</td><td>${
+      notas[i].contenido
+    }
+  </td><td>${
+    notas[i].fecha
+  }</td><td><button type="button" class="btn btn-secondary" onclick="borrarNota('${
+      notas[i].id
+    }')">Borrar</button>
+  <td><button type="button" class="btn btn-secondary"  data-toggle="modal" data-target="#ejemploModal" onclick="cargarForm('${
+    notas[i].titulo
+  }')">Editar</button></td></tr>`;
+  }
 }
 //Metodo de eliminacion de notas
-function borrarNota(id){
+function borrarNota(id) {
   //debo recorrer la lista y comprar el id pasado por parametro con cada posicion
-let notas = JSON.parse(localStorage.getItem("notas"));
-let choque = notas.findIndex(nota => nota.id == id);
+  let notas = JSON.parse(localStorage.getItem("notas"));
+  let choque = notas.findIndex(nota => nota.id == id);
 
-//ahora elimino con splice pasandole esa posicion.
-notas.splice(choque, 1);
-localStorage.setItem("notas", JSON.stringify(notas));
+  //ahora elimino con splice pasandole esa posicion.
+  notas.splice(choque, 1);
+  localStorage.setItem("notas", JSON.stringify(notas));
 
-alert('Nota eliminada')
-location.reload();
+  alert("Nota eliminada");
+  location.reload();
+}
 
+//Cargar formulario con datos de nota
+function cargarForm(titulo) {
+  //obtener los datos del objeto nota
+  let notas = JSON.parse(localStorage.getItem("notas"));
 
+  let indice = notas.find(n => n.titulo == titulo);
+  document.getElementById("editTitle").value = indice.titulo;
+  document.getElementById("editTexto").value = indice.contenido;
+  document.getElementById("guardarCambios").addEventListener("click",function(){editarNota(indice.id)});
+  
 }
 
 //EDITAR NOTA
-function editarNota(){
 
-  const { value: text } = Swal.fire({
-    title: 'Enter your IP address',
-  input: 'text',
-  inputValue: "",
-    input: 'textarea',
-    inputPlaceholder: 'Escriba el nuevo texto aqui',
-    inputAttributes: {
-      'aria-label': 'Type your message here'
-    },
-    showCancelButton: true
-  })
+function editarNota(id) {
+  let notas = JSON.parse(localStorage.getItem("notas"));
   
-  if (text) {
-    Swal.fire(text)
-  }
-}
+  
+  let title = document.getElementById("editTitle");
+  let content = document.getElementById("editTexto");
+  
+  
+  let index = notas.findIndex(n => n.id == id);
+  
+  notas[index].titulo= title.value;
+  notas[index].contenido= content.value;
+  console.log(notas);
+  
+  localStorage.setItem("notas", JSON.stringify(notas));
+  window.alert("Nota modificada exitosamente");
 
+  location.reload();
+  
+  //comprobacion de que no este vacio
+  
+  //el valor obtenido de los inputs debe reemplazar a los de la posicion donde se encuentra el boton
+}
 
 //Funcion de obtener fecha de creacion y/o modificacion de la nota
 function obtenerFecha() {
@@ -166,5 +177,3 @@ function obtenerFecha() {
     today.getMinutes();
   return fechaYHora;
 }
-
-
